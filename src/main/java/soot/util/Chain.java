@@ -87,8 +87,8 @@ public interface Chain<E> extends Collection<E>, Serializable {
   public void removeLast();
 
   /**
-   * Returns true if object <code>someObject</code> follows object <code>someReferenceObject</code> in the Chain,
-   * i.e. someReferenceObject comes first and then someObject.
+   * Returns true if object <code>someObject</code> follows object <code>someReferenceObject</code> in the Chain, i.e.
+   * someReferenceObject comes first and then someObject.
    */
   public boolean follows(E someObject, E someReferenceObject);
 

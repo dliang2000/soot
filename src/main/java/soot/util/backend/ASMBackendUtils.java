@@ -73,8 +73,7 @@ public class ASMBackendUtils {
     }
     return s.replace('.', '/');
   }
-  
-  
+
   /**
    * Compute type description for methods, comprising parameter types and return type.
    *
@@ -83,14 +82,16 @@ public class ASMBackendUtils {
    * @return Method type description
    */
   public static String toTypeDesc(SootMethodRef m) {
-    return toTypeDesc(m.parameterTypes(),m.returnType());
+    return toTypeDesc(m.parameterTypes(), m.returnType());
   }
 
   /**
    * Compute type description for methods, comprising parameter types and return type.
    * 
-   * @param parameterTypes The parameters for some method
-   * @param returnType The return type for some method
+   * @param parameterTypes
+   *          The parameters for some method
+   * @param returnType
+   *          The return type for some method
    * @return Method type description
    */
   public static String toTypeDesc(List<Type> parameterTypes, Type returnType) {

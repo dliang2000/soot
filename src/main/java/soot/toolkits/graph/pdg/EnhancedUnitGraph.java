@@ -77,8 +77,8 @@ public class EnhancedUnitGraph extends UnitGraph {
     // Initialize all units in the unitToSuccs and unitsToPreds
 
     for (Unit u : body.getUnits()) {
-      unitToSuccs.put(u,new ArrayList<>());
-      unitToPreds.put(u,new ArrayList<>());
+      unitToSuccs.put(u, new ArrayList<>());
+      unitToPreds.put(u, new ArrayList<>());
     }
 
     /*

@@ -91,7 +91,7 @@ public class WeakMapNumberer<T extends Numberable> implements IterableNumberer<T
     if (number == 0) {
       return null;
     }
-    return rmap.get(new Integer((int)number)).get();
+    return rmap.get(new Integer((int) number)).get();
   }
 
   @Override

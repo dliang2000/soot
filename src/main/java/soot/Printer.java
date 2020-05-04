@@ -46,7 +46,8 @@ public class Printer {
   private Function<SootClass, String> customClassSignaturePrinter;
   private Function<SootMethod, String> customMethodSignaturePrinter;
 
-  public Printer(Singletons.Global g) {}
+  public Printer(Singletons.Global g) {
+  }
 
   public static Printer v() {
     return G.v().soot_Printer();
@@ -195,8 +196,7 @@ public class Printer {
             continue;
           }
 
-          if (!Modifier.isAbstract(method.getModifiers())
-              && !Modifier.isNative(method.getModifiers())) {
+          if (!Modifier.isAbstract(method.getModifiers()) && !Modifier.isNative(method.getModifiers())) {
             if (!method.hasActiveBody()) {
               method.retrieveActiveBody(); // force loading the body
               if (!method.hasActiveBody()) {
@@ -246,10 +246,11 @@ public class Printer {
   }
 
   /**
-   * Prints out the method corresponding to b Body, (declaration and body), in the textual format
-   * corresponding to the IR used to encode b body.
+   * Prints out the method corresponding to b Body, (declaration and body), in the textual format corresponding to the IR
+   * used to encode b body.
    *
-   * @param out a PrintWriter instance to print to.
+   * @param out
+   *          a PrintWriter instance to print to.
    */
   public void printTo(Body b, PrintWriter out) {
     // b.validate();
@@ -334,8 +335,7 @@ public class Printer {
   }
 
   /** Prints the given <code>JimpleBody</code> to the specified <code>PrintWriter</code>. */
-  private void printStatementsInBody(
-      Body body, java.io.PrintWriter out, LabeledUnitPrinter up, UnitGraph unitGraph) {
+  private void printStatementsInBody(Body body, java.io.PrintWriter out, LabeledUnitPrinter up, UnitGraph unitGraph) {
     Chain<Unit> units = body.getUnits();
     Unit previousStmt;
 
@@ -349,8 +349,7 @@ public class Printer {
         // body statement has a label on it
 
         if (currentStmt != units.getFirst()) {
-          if (unitGraph.getSuccsOf(previousStmt).size() != 1
-              || unitGraph.getPredsOf(currentStmt).size() != 1
+          if (unitGraph.getSuccsOf(previousStmt).size() != 1 || unitGraph.getPredsOf(currentStmt).size() != 1
               || up.labels().containsKey(currentStmt)) {
             up.newline();
           } else {
@@ -420,16 +419,8 @@ public class Printer {
       while (trapIt.hasNext()) {
         Trap trap = trapIt.next();
 
-        out.println(
-            "        catch "
-                + printSignature(trap.getException())
-                + " from "
-                + up.labels().get(trap.getBeginUnit())
-                + " to "
-                + up.labels().get(trap.getEndUnit())
-                + " with "
-                + up.labels().get(trap.getHandlerUnit())
-                + ";");
+        out.println("        catch " + printSignature(trap.getException()) + " from " + up.labels().get(trap.getBeginUnit())
+            + " to " + up.labels().get(trap.getEndUnit()) + " with " + up.labels().get(trap.getHandlerUnit()) + ";");
 
         incJimpleLnNum();
       }
@@ -452,8 +443,7 @@ public class Printer {
   private void printLocalsInBody(Body body, UnitPrinter up) {
     // Print out local variables
     {
-      Map<Type, List<Local>> typeToLocals =
-          new DeterministicHashMap<Type, List<Local>>(body.getLocalCount() * 2 + 1, 0.7f);
+      Map<Type, List<Local>> typeToLocals = new DeterministicHashMap<Type, List<Local>>(body.getLocalCount() * 2 + 1, 0.7f);
 
       // Collect locals
       {

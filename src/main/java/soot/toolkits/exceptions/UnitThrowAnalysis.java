@@ -864,10 +864,10 @@ public class UnitThrowAnalysis extends AbstractThrowAnalysis {
 
     public void caseMethodHandle(MethodHandle handle) {
     }
-    
+
     public void caseMethodType(MethodType type) {
     }
-    
+
     // Declared by ExprSwitch interface:
 
     public void caseAddExpr(AddExpr expr) {

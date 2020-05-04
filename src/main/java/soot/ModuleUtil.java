@@ -28,7 +28,6 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -144,12 +143,12 @@ public final class ModuleUtil {
         modulePackageCache.put(modInfo.getModuleName() + "/" + packageName, modInf.getModuleName());
         return modInf.getModuleName();
       } else {
-    	Set<String> hasCheckedModule = new HashSet<String>();
-     	String tModuleName = checkTransitiveChain(modInf, packageName, toModuleName, hasCheckedModule);
-    	if (tModuleName != null) {
+        Set<String> hasCheckedModule = new HashSet<String>();
+        String tModuleName = checkTransitiveChain(modInf, packageName, toModuleName, hasCheckedModule);
+        if (tModuleName != null) {
           modulePackageCache.put(modInfo.getModuleName() + "/" + packageName, tModuleName);
           return tModuleName;
-    	} 
+        }
 
       }
 
@@ -157,23 +156,28 @@ public final class ModuleUtil {
     // if the class is not exported by any package, it has to internal to this module
     return toModuleName;
   }
+
   /**
-   * recycle check if exported packages is "requires transitive" case.
-   * "requires transitive" module will transmit, need chain check until transitive finished.
-   * @param modInfo moudleinfo 
-   * @param packageName package name
-   * @param toModuleName defined moduleName
+   * recycle check if exported packages is "requires transitive" case. "requires transitive" module will transmit, need chain
+   * check until transitive finished.
+   * 
+   * @param modInfo
+   *          moudleinfo
+   * @param packageName
+   *          package name
+   * @param toModuleName
+   *          defined moduleName
    * 
    */
   private String checkTransitiveChain(SootModuleInfo modInfo, String packageName, String toModuleName,
-          Set<String> hasCheckedModule) {
+      Set<String> hasCheckedModule) {
     for (Map.Entry<SootModuleInfo, Integer> entry : modInfo.retrieveRequiredModules().entrySet()) {
       if ((entry.getValue() & Modifier.REQUIRES_TRANSITIVE) != 0) { // check if module is exported via "requires public"
-    	if (hasCheckedModule.contains(entry.getKey().getModuleName())) {
+        if (hasCheckedModule.contains(entry.getKey().getModuleName())) {
           continue;
-    	} else {
+        } else {
           hasCheckedModule.add(entry.getKey().getModuleName());
-    	}
+        }
         if (entry.getKey().exportsPackage(packageName, toModuleName)) {
           return entry.getKey().getModuleName();
         } else {
@@ -183,8 +187,6 @@ public final class ModuleUtil {
     }
     return null;
   }
-
-
 
   /**
    * The returns the package name of a full qualified class name

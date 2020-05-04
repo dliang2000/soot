@@ -32,11 +32,11 @@ import soot.Type;
 import soot.util.Switch;
 
 public class MethodType extends Constant {
-  
+
   private static final long serialVersionUID = 3523899677165980823L;
   protected Type returnType;
   protected List<Type> parameterTypes;
-  
+
   private MethodType(List<Type> parameterTypes, Type returnType) {
     this.returnType = returnType;
     this.parameterTypes = parameterTypes;
@@ -49,15 +49,15 @@ public class MethodType extends Constant {
   public Type getType() {
     return RefType.v("java.lang.invoke.MethodType");
   }
-  
+
   public String toString() {
     return "methodtype: " + SootMethod.getSubSignature("__METHODTYPE__", parameterTypes, returnType);
   }
-  
+
   public List<Type> getParameterTypes() {
     return parameterTypes == null ? Collections.<Type>emptyList() : parameterTypes;
   }
-  
+
   public Type getReturnType() {
     return returnType;
   }

@@ -23,7 +23,6 @@ package soot;
  */
 
 import soot.tagkit.AbstractHost;
-import soot.tagkit.Tag;
 
 /**
  * Reference implementation for ValueBox; just add a canContainValue method.

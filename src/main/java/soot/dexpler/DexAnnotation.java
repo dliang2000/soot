@@ -98,7 +98,7 @@ import soot.toDex.SootToDexUtils;
  *
  */
 public class DexAnnotation {
-  
+
   private static final Logger logger = LoggerFactory.getLogger(DexAnnotation.class);
 
   public static final String JAVA_DEPRECATED = "java.lang.Deprecated";

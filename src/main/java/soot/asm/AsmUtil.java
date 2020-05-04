@@ -23,8 +23,10 @@ package soot.asm;
  */
 
 import com.google.common.base.Optional;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import soot.ArrayType;
 import soot.BooleanType;
 import soot.ByteType;

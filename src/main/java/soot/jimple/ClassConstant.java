@@ -135,10 +135,9 @@ public class ClassConstant extends Constant {
   }
 
   /**
-   * Gets an internal representation of the class used in Java bytecode.
-   * The returned string is similar to the fully qualified name but with '/' instead of '.'.
-   * Example: "java/lang/Object".
-   * See https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.2.1
+   * Gets an internal representation of the class used in Java bytecode. The returned string is similar to the fully
+   * qualified name but with '/' instead of '.'. Example: "java/lang/Object". See
+   * https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.2.1
    */
   public String toInternalString() {
     String internal = value;

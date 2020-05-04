@@ -24,6 +24,7 @@ package soot.javaToJimple;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import soot.Body;
 import soot.Local;
 import soot.jimple.toolkits.typing.fast.Integer127Type;
@@ -58,9 +59,7 @@ public class LocalGenerator {
     initLocalNames();
 
     String name = "v";
-    if (type instanceof soot.IntType
-        || type instanceof Integer1Type
-        || type instanceof Integer127Type
+    if (type instanceof soot.IntType || type instanceof Integer1Type || type instanceof Integer127Type
         || type instanceof Integer32767Type) {
       while (true) {
         name = nextIntName();

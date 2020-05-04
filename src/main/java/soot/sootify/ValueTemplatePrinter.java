@@ -200,7 +200,7 @@ public class ValueTemplatePrinter implements JimpleValueSwitch {
   public void caseMethodHandle(MethodHandle handle) {
     throw new UnsupportedOperationException("we have not yet determined how to print Java 7 method handles");
   }
-  
+
   public void caseMethodType(MethodType type) {
     throw new UnsupportedOperationException("we have not yet determined how to print Java 8 method handles");
   }

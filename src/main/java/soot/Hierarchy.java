@@ -311,7 +311,7 @@ public class Hierarchy {
     if (directSubInterfaces == null || directSubInterfaces.isEmpty()) {
       return Collections.emptyList();
     }
-    
+
     final List<SootClass> result = new ArrayList<>();
     for (SootClass si : directSubInterfaces) {
       result.addAll(getSubinterfacesOfIncluding(si));

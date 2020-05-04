@@ -77,10 +77,10 @@ public class SynchronizerManager {
    * <pre>
           $r3 = <quack: java.lang.Class class$quack>;
           .if $r3 != .null .goto label2;
-
+  
           $r3 = .staticinvoke <quack: java.lang.Class class$(java.lang.String)>("quack");
           <quack: java.lang.Class class$quack> = $r3;
-
+  
        label2:
    * </pre>
    */
@@ -235,13 +235,13 @@ public class SynchronizerManager {
                java.lang.ClassNotFoundException r1, $r3;
                java.lang.Class $r2;
                java.lang.NoClassDefFoundError $r4;
-
+  
                r0 := @parameter0: java.lang.String;
-
+  
            label0:
                $r2 = .staticinvoke <java.lang.Class: java.lang.Class forName(java.lang.String)>(r0);
                .return $r2;
-
+  
            label1:
                $r3 := @caughtexception;
                r1 = $r3;
@@ -249,7 +249,7 @@ public class SynchronizerManager {
                $r5 = .virtualinvoke r1.<java.lang.Throwable: java.lang.String getMessage()>();
                .specialinvoke $r4.<java.lang.NoClassDefFoundError: .void <init>(java.lang.String)>($r5);
                .throw $r4;
-
+  
                .catch java.lang.ClassNotFoundException .from label0 .to label1 .with label1;
            }
    * </pre>

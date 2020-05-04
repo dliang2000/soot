@@ -470,6 +470,7 @@ public class ShimpleBodyBuilder {
   }
 
   static String freshSeparator = "_";
+
   public static void setSeparator(String sep) {
     freshSeparator = sep;
   }

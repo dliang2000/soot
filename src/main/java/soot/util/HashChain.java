@@ -120,7 +120,7 @@ public class HashChain<E> extends AbstractCollection<E> implements Chain<E> {
     try {
       it = iterator(someReferenceObject);
     } catch (NoSuchElementException e) {
-      //someReferenceObject not in chain.
+      // someReferenceObject not in chain.
       return false;
     }
     while (it.hasNext()) {

@@ -26,8 +26,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import soot.Body;
 import soot.BodyTransformer;
 import soot.G;
@@ -67,7 +69,8 @@ public class CopyPropagator extends BodyTransformer {
   protected ThrowAnalysis throwAnalysis = null;
   protected boolean forceOmitExceptingUnitEdges = false;
 
-  public CopyPropagator(Singletons.Global g) {}
+  public CopyPropagator(Singletons.Global g) {
+  }
 
   public CopyPropagator(ThrowAnalysis ta) {
     this.throwAnalysis = ta;
@@ -85,15 +88,17 @@ public class CopyPropagator extends BodyTransformer {
   /**
    * Cascaded copy propagator.
    *
-   * <p>If it encounters situations of the form: A: a = ...; B: ... x = a; C:... use (x); where a
-   * has only one definition, and x has only one definition (B), then it can propagate immediately
-   * without checking between B and C for redefinitions of a (namely) A because they cannot occur.
-   * In this case the propagator is global.
+   * <p>
+   * If it encounters situations of the form: A: a = ...; B: ... x = a; C:... use (x); where a has only one definition, and x
+   * has only one definition (B), then it can propagate immediately without checking between B and C for redefinitions of a
+   * (namely) A because they cannot occur. In this case the propagator is global.
    *
-   * <p>Otherwise, if a has multiple definitions then it only checks for redefinitions of Propagates
-   * constants and copies in extended basic blocks.
+   * <p>
+   * Otherwise, if a has multiple definitions then it only checks for redefinitions of Propagates constants and copies in
+   * extended basic blocks.
    *
-   * <p>Does not propagate stack locals when the "only-regular-locals" option is true.
+   * <p>
+   * Does not propagate stack locals when the "only-regular-locals" option is true.
    */
   protected void internalTransform(Body b, String phaseName, Map<String, String> opts) {
     CPOptions options = new CPOptions(opts);
@@ -136,15 +141,13 @@ public class CopyPropagator extends BodyTransformer {
     }
 
     // Go through the definitions, building the webs
-    UnitGraph graph =
-        new ExceptionalUnitGraph(stmtBody, throwAnalysis, forceOmitExceptingUnitEdges);
+    UnitGraph graph = new ExceptionalUnitGraph(stmtBody, throwAnalysis, forceOmitExceptingUnitEdges);
 
     LocalDefs localDefs = LocalDefs.Factory.newLocalDefs(graph);
 
     // Perform a local propagation pass.
     {
-      Iterator<Unit> stmtIt =
-          (new PseudoTopologicalOrderer<Unit>()).newList(graph, false).iterator();
+      Iterator<Unit> stmtIt = (new PseudoTopologicalOrderer<Unit>()).newList(graph, false).iterator();
       while (stmtIt.hasNext()) {
         Stmt stmt = (Stmt) stmtIt.next();
 
@@ -205,10 +208,8 @@ public class CopyPropagator extends BodyTransformer {
               } else if (def.getRightOp() instanceof CastExpr) {
                 CastExpr ce = (CastExpr) def.getRightOp();
                 if (ce.getCastType() instanceof RefLikeType) {
-                  boolean isConstNull =
-                      ce.getOp() instanceof IntConstant && ((IntConstant) ce.getOp()).value == 0;
-                  isConstNull |=
-                      ce.getOp() instanceof LongConstant && ((LongConstant) ce.getOp()).value == 0;
+                  boolean isConstNull = ce.getOp() instanceof IntConstant && ((IntConstant) ce.getOp()).value == 0;
+                  isConstNull |= ce.getOp() instanceof LongConstant && ((LongConstant) ce.getOp()).value == 0;
                   if (isConstNull) {
                     if (useBox.canContainValue(NullConstant.v())) {
                       useBox.setValue(NullConstant.v());
@@ -283,14 +284,8 @@ public class CopyPropagator extends BodyTransformer {
     }
 
     if (Options.v().verbose()) {
-      logger.debug(
-          "["
-              + stmtBody.getMethod().getName()
-              + "]     Propagated: "
-              + fastCopyPropagationCount
-              + " fast copies  "
-              + slowCopyPropagationCount
-              + " slow copies");
+      logger.debug("[" + stmtBody.getMethod().getName() + "]     Propagated: " + fastCopyPropagationCount + " fast copies  "
+          + slowCopyPropagationCount + " slow copies");
     }
 
     if (Options.v().time()) {
@@ -307,11 +302,12 @@ public class CopyPropagator extends BodyTransformer {
   }
 
   /**
-   * Copies the {@link SourceLnPosTag} and {@link LineNumberTag}s from the given host to the given
-   * valuebox
+   * Copies the {@link SourceLnPosTag} and {@link LineNumberTag}s from the given host to the given valuebox
    *
-   * @param useBox The box to which the position tags should be copied
-   * @param host The host from which the position tags should be copied
+   * @param useBox
+   *          The box to which the position tags should be copied
+   * @param host
+   *          The host from which the position tags should be copied
    * @return True if a copy was conducted, false otherwise
    */
   private boolean copyLineTags(ValueBox useBox, Host host) {
